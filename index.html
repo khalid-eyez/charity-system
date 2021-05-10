@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>login</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="ui/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="ui/dist/css/adminlte.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="ui/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <script src="ui/plugins/jquery/jquery.min.js"></script>
+  <script src="ui/sweet.js"></script>
+  <script>
+  $('document').ready(function(){
+
+  $('#gotomain').click(function(e){
+  e.preventDefault();
+  window.location.href='ui/main.html';
+  });
+ $('#login').click(function(d){
+
+  d.preventDefault();
+
+  var pass=$('#pass').val();
+  var username=$('#user').val();
+  if(pass!="" && username!="")
+  {
+  $.get("eng/controllers/controller.login.php",
+  {
+    pass: pass,
+    username: username
+  },
+  function(data){
+    if(data=="donor"){window.location.href='ui/donor_dash.html';}
+    else if(data=="ngo"){window.location.href='ui/ngo_dash.html';}
+    else
+    { 
+      swal("login failed",data+"incorrect password or email","info");
+      //alert("impossible to login");
+    }
+  });
+}
+else{
+     swal("all fields are required","","info");
+
+}
+
+
+ })
+
+  })
+
+
+  </script>
+</head>
+<body background="ui/dist/img/c/images1.jpg" style="background-repeat: no-repeat;background-attachment: fixed;background-size:100%;background-position: center;" class="hold-transition login-page">
+   <!-- Navbar  -->
+  <nav class="navbar navbar-expand-sm justify-content-center" style="background-color:#d203fc;color:white;border-radius: 8px;">
+    <a class="navbar-brand" href="#">
+     <img src="ui/dist/img/logo.png" alt="charity logo" style="width:40px;">
+   </a>
+   Charity System
+ </nav> 
+
+  <!-- /.navbar -->
+
+  <!-- /.content-wrapper -->
+  <div class="login-box">
+
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="login-logo">
+     
+      </div>
+      <div class="card-body login-card-body">
+        <div class="card-header text-center">
+          <img src="ui/dist/img/acc.png" alt="charity system" class="brand-image img-circle elevation-3" style="opacity: 1">
+        </div>
+        <form action="" method="post">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" id="user" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" id="pass" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+        
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block" style="background-color: #ca03fc;border: none;" id="login" >Sign In</button>
+            </div>
+            <div class="col-8">
+              </a><button type="submit" class="btn btn-primary btn-block" style="background-color: #ca03fc;border: none;" id="gotomain">continue anyway</button>   
+            </div>
+       
+            <!-- /.col -->
+          </div>
+        </form>
+        <!-- /.social-auth-links -->
+        <center>
+        <p class="mb-1">
+          <a href="ui/forgot-password.html">forgot password</a>
+        </p>
+        <p class="mb-0">
+          <a href="ui/register.html" class="text-center">Register</a>
+        </p>
+      </center>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+
+</div>
+<footer style="margin-top: 10%; color: #ffffff;">
+  <strong>Copyright &copy; 2020-2021 charity Group.</strong>
+  All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 1.0
+  </div>
+</footer>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="ui/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="ui/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="ui/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="ui/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="ui/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="ui/dist/js/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>charity main</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="sweet.js"></script>
+  <script>
+  $('document').ready(function(){
+  //new request handling
+
+  
+ function loadinfo(){
+  $.get("../eng/controllers/controller.ngo.php",
+    {
+    request: "allinfo",
+    },
+  function(data){
+    var info=$.parseJSON(data);
+    $('#ngoimg').attr('src','dist/img/'+info.img);
+    $('#titlename').html('<a href="#"  id="uploadx" data-toggle="modal" data-target="#modal-default"><i class="fas fa-edit"></i>change</a>');
+    $('#inputName').val(info.name);
+    $('#country').val(info.country);
+    $('#city').val(info.city);
+    $('#mail').val(info.email);
+    $('#phone').val(info.phone);
+    $('#status').val(info.status);
+   
+   
+  });
+}
+loadinfo();
+
+  $('#update').click(function(n){
+
+  n.preventDefault();
+
+      var name=$('#inputName').val();
+      var country=$('#country').val();
+      var city=$('#city').val();
+      var email=$('#mail').val();
+      var phone=$('#phone').val();
+
+      //sending
+      $.get("../eng/controllers/controller.ngo.php",
+    {
+    request: "updateinfo",
+    name:name,
+    country:country,
+    city:city,
+    email:email,
+    phone:phone
+    },
+  function(data){
+       swal(data,"","info");
+  }
+  );
+});
+
+
+var type="";
+
+$('#upload').click(function(a){
+
+  a.preventDefault();
+
+  type="file";
+});
+
+$('#titlename').click(function(s){
+
+s.preventDefault();
+
+type="image";
+});
+
+
+$('#uploader').click(function(a){
+
+a.preventDefault();
+var upload_data=new FormData($('#myform')[0]);
+    upload_data.append('type',type);
+
+//sending to the controller with ajax
+$.ajax({
+  url:'../eng/controllers/controller.ngo.php',
+  data:upload_data,
+  dataType:'text',
+  processData: false,
+  contentType:false,
+  type: 'POST',
+  success: function(x){
+
+    load_uploads();
+  
+
+      loadinfo();
+    
+    swal(x,"","info");
+  }
+/*$.get("../eng/controllers/controller.ngo.php",
+    {
+    request: "upload",
+    file:upload_data
+    },
+  function(data){
+       swal(data,"","info");
+  }
+  );*/
+
+
+});
+});
+
+
+//loading all uploads
+
+function load_uploads()
+{
+  $.get("../eng/controllers/controller.ngo.php",
+    {
+    request: "alluploads"
+  
+    },
+  function(data){
+       var dt=$.parseJSON(data);
+      // swal("",data,"info");
+       var objs="";
+       for(var item in dt)
+       {
+         objs+='<tr>';
+         objs+='<td><a href="../../data/'+dt[item]["path"]+'" >'+dt[item]["path"]+'</a></td>';            
+         objs+='<td class="text-right py-0 align-middle">';
+         objs+='<div class="btn-group btn-group-sm" id="uploaddiv">';
+        // objs+='<a href="../../data/'+dt[item]["path"]+'" class="btn btn-info"><i class="fas fa-download"></i></a>';
+         objs+='<a href="" class="btn btn-danger" ><i class="fas fa-trash" id="'+dt[item]["id"]+'"></i></a>';
+         objs+='</div>';
+         objs+='</td>';
+
+         
+
+       }
+       $('#uploads').html(objs);
+  }
+  );
+}
+load_uploads();
+
+//deleting files
+$('#uploads').click(function(z){
+ z.preventDefault();
+ var idx="";
+ if(z.target.tagName=="I")
+ {
+  idx=parseInt(z.target.attributes.id.value);
+  $.get("../eng/controllers/controller.ngo.php",
+    {
+    request: "deletefile",
+    id:idx
+    },
+  function(data){
+    load_uploads();
+  }
+  );
+ }
+})
+
+});
+
+
+   
+ 
+  </script>
+</head>
+<body class="hold-transition layout-top-nav">
+
+
+  <!-- Navbar -->
+
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"></h1>
+          </div><!-- /.col -->
+      
+      </div><!-- /.container-fluid -->
+    </div>
+    </div>
+          
+  
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container">
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <img class="profile-user-img img-fluid img-circle"
+                   src=""
+                   id="ngoimg">
+            </div>
+            
+            <h3 class="profile-username text-center" id="titlename"></h3>
+
+      
+
+            <ul class="list-group list-group-unbordered mb-3">
+              <li class="list-group-item">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">General account information</h3>
+      
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputName">Organisation Name</label>
+                      <input type="text" id="inputName" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="inputName">Organisation country</label>
+                      <input type="text" id="country" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="inputName">Organisation city</label>
+                      <input type="text" id="city" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="inputName">Organisation Email</label>
+                      <input type="text" id="mail" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">phone number</label>
+                      <input type="text" id="phone" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="inputStatus">Status</label>
+                      <input type="text" id="status" class="form-control" >
+                    </div>
+                    <a href="#" class="btn btn-primary btn-block" id="update"><b>Save changes</b></a>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="card card-info">
+                  <div class="card-header">
+                    <h3 class="card-title">organisation documents</h3>
+      
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th><a href="#"  id="upload" data-toggle="modal" data-target="#modal-default">upload new</a></th>
+                        </tr>
+                      </thead>
+                      <tbody id="uploads">
+      
+                       
+                      
+                      
+                       
+                   
+      
+                      </tbody>
+                    </table>
+                    <div class="modal fade" id="modal-default" style="display: none;">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                         
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form id="myform" method="POST" enctype="multipart/form-data">
+                      <div class="form-group">
+                        
+                        <label for="inputName">choose file</label>
+                        <input type="file" id="inputfile" name="thefile" class="form-control" placeholder="file">
+                      </form>
+                      </div>
+                  
+                
+                <div class="modal-footer justify-content-between">
+           
+                  <button type="button" class="btn btn-primary" style="background-color:rgb(152, 29, 223);border:none" id="uploader">upload</button>
+                </div>
+                </div>
+                </div>
+                </div>
+
+           
+                </div>
+             
+              
+                  </div>
+          
+                  <!-- /.card-body -->
+                </div>
+              </li>
+        
+            </ul>
+
+            
+          </div>
+          <!-- /.card-body -->
+        </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  
+  <!-- /.control-sidebar -->
+</div>
+
+</div>
+  <!-- Main Footer -->
+
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="content-wrapper ">
+  <!-- Navbar -->
+
+     <!-- modal-->
+     <div class="row">
+     <div class="col-md-6">
+     <div class="modal fade" id="modal-default" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">New request</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+      <div class="form-group">
+        <label for="inputName">Project Name</label>
+        <input type="text" id="inputName" class="form-control" value="AdminLTE">
+      </div>
+      <div class="form-group">
+        <label for="inputDescription">Project Description</label>
+        <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</textarea>
+      </div>
+      <div class="form-group">
+        <label for="inputStatus">Status</label>
+        <select id="inputStatus" class="form-control custom-select">
+          <option disabled>Select one</option>
+          <option>On Hold</option>
+          <option>Canceled</option>
+          <option selected>Success</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inputClientCompany">Client Company</label>
+        <input type="text" id="inputClientCompany" class="form-control" value="Deveint Inc">
+      </div>
+      <div class="form-group">
+        <label for="inputProjectLeader">Project Leader</label>
+        <input type="text" id="inputProjectLeader" class="form-control" value="Tony Chicken">
+      </div>
+    </div>
+
+
+
+
+
+<div class="modal-footer justify-content-between">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary">Save changes</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+  <div class="card-header nav navbar navbar-expand navbar-white navbar-light border-bottom p-0" style="color:black">
+    <a href="#" class="brand-link" >
+      <img src="dist/img/beg.png" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">
+      <span class="brand-text font-weight-light" style="font-weight: bold; color: rgb(152, 29, 223);" >Requests</span>
+    </a>
+ 
+  <div class="form-inline">
+    <div class="input-group" data-widget="sidebar-search" >
+      <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="height: 23px; border-radius: 7px;margin-top: 3%; margin-left: 40%; width:30%" >
+      <div class="input-group-append">
+        <button class="btn btn-sidebar">
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+      
+      </div>
+    </div>
+    <button type="button" class="btn btn-block btn-primary btn-xs" style="width:10%;margin-left: 10%;background-color:  rgb(152, 29, 223); border-radius: 7px; border:none; color:white" data-toggle="modal" data-target="#modal-default">New Request</button>
+  </div>
+    <!-- ./card-header -->
+    <div class="card-body p-0">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td class="border-0">winner</td>
+          </tr>
+          <tr data-widget="expandable-table" aria-expanded="false">
+            <td>
+              <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+              219
+            </td>
+          </tr>
+          <tr class="expandable-body d-none">
+            <td>
+              <div class="p-0" style="display: none;">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                      <td>
+                        <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                        219-1
+                      </td>
+                    </tr>
+                    <tr class="expandable-body d-none">
+                      <td>
+                        <div class="p-0" style="display: none;">
+                          <table class="table table-hover">
+                            <tbody>
+                              <tr>
+                                <td>219-1-1</td>
+                              </tr>
+                              <tr>
+                                <td>219-1-2</td>
+                              </tr>
+                              <tr>
+                                <td>219-1-3</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                      <td>
+                        <button type="button" class="btn btn-primary p-0">
+                          <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                        </button>
+                        219-2
+                      </td>
+                    </tr>
+                    <tr class="expandable-body d-none">
+                      <td>
+                        <div class="p-0" style="display: none;">
+                          <table class="table table-hover">
+                            <tbody>
+                              <tr>
+                                <td>219-2-1</td>
+                              </tr>
+                              <tr>
+                                <td>219-2-2</td>
+                              </tr>
+                              <tr>
+                                <td>219-2-3</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>219-3</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>657</td>
+          </tr>
+          <tr>
+            <td>175</td>
+          </tr>
+          <tr>
+            <td>134</td>
+          </tr>
+          <tr>
+            <td>494</td>
+          </tr>
+          <tr>
+            <td>832</td>
+          </tr>
+          <tr>
+            <td>982</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>
