@@ -12,17 +12,99 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="ui/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="sweet.js"></script>
+  <link rel="stylesheet" href="ui/dist/css/adminlte.min.css">
+  <script src="ui/plugins/jquery/jquery.min.js"></script>
+  <script src="ui/sweet.js"></script>
   <script>
   $('document').ready(function(){
 
+    $('#ngo').click(function(d){
 
-  $.get("../eng/controllers/controller.main.php",
+d.preventDefault();
+
+var pass=$('#passd').val();
+var rpass=$('#rpass').val();
+var username=$('#mail').val();
+var name=$('#name').val();
+if(pass!="" && username!="" && name!="" && rpass!="")
+{
+  if(pass===rpass)
+  {
+$.get("eng/controllers/controller.register.php",
+{
+  pass: pass,
+  username: username,
+  name:name,
+  user:"ngo"
+},
+function(data){
+  if(data=="yes"){swal("","registration successful","info");}
+  else
+  { 
+    swal(data+"registration failed","","info");
+    //alert("impossible to login");
+  }
+});
+}
+else
+{
+swal("input error","passwords are not identical","error");
+}
+}
+else{
+   swal("fill in all fields","","info");
+
+}
+
+
+});
+
+//the donor
+
+$('#rdonor').click(function(k){
+
+k.preventDefault();
+
+var pass=$('#passd').val();
+var rpass=$('#rpass').val();
+var username=$('#mail').val();
+var name=$('#name').val();
+if(pass!="" && username!="" && name!="" && rpass!="")
+{
+if(pass===rpass)
+{
+$.get("eng/controllers/controller.register.php",
+{
+pass: pass,
+username: username,
+name:name,
+user:"donor"
+},
+function(data){
+if(data=="yes"){swal("","registration successful","info");}
+else
+{ 
+  swal(data+"registration failed","","info");
+  //alert("impossible to login");
+}
+});
+}
+else
+{
+swal("input error","passwords are not identical","error");
+}
+}
+else{
+ swal("fill in all fields","","info");
+
+}
+
+
+})
+  $.get("eng/controllers/controller.main.php",
   {
     request:"allrequests"
     
@@ -46,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='<div class="card">';
           elem+='<div class="card-header p-2 " >';
           elem+='<div class="user-block" style="margin-right:20%">';
-          elem+='<img class="img-circle img-bordered-sm" src="dist/img/'+img+'" >';
+          elem+='<img class="img-circle img-bordered-sm" src="ui/dist/img/'+img+'" >';
           elem+='<span class="username">';
           elem+='<a href="#">'+name+'</a>';
           elem+='</span>';
@@ -56,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='<span><b>'+title+'</b></span>';
           elem+='</div>';
           elem+='<div class="col-md-4">';
-          elem+='<img class="img-circle img-bordered-sm" src="dist/img/beg.png" alt="beg icon" style="height:85%;width:20%">';
+          elem+='<img class="img-circle img-bordered-sm" src="ui/dist/img/beg.png" alt="beg icon" style="height:85%;width:20%">';
           elem+='<span>'+budget+'TZS required</span>';
           elem+='</div>';
           elem+='<div class="col-md-3">';
@@ -108,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   var username=$('#user').val();
   if(pass!="" && username!="")
   {
-  $.get("../eng/controllers/controller.login.php",
+  $.get("eng/controllers/controller.login.php",
   {
     pass: pass,
     username: username
@@ -142,7 +224,7 @@ else{
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: rgb(152, 29, 223);color: rgb(255, 255, 255);">
     <div class="container" >
       <a href="" class="navbar-brand" style="color: rgb(255, 255, 255);">
-        <img src="dist/img/logo.png" alt="charity logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="ui/dist/img/logo.png" alt="charity logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Charity System</span>
       </a>
 
@@ -162,6 +244,9 @@ else{
         <a class="nav-link" href="#" role="button" style="color: white;" data-toggle="modal" data-target="#modal-default">
         <i class="fas fa-sign-in-alt fa-2x"></i>
       </a>
+      <a class="nav-link" href="#" role="button" style="color: white;" data-toggle="modal" data-target="#modal-reg">
+        <i class="fas fa-user-plus fa-2x"></i>
+      </a>
       </div>
     
       <!-- Right navbar links -->
@@ -169,7 +254,7 @@ else{
     </nav> 
     
   </div>
-
+ 
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -179,7 +264,7 @@ else{
 
     </div>
     <div class="tab-content" style="padding-left:2%; padding-right: 2%; padding-top:2%;overflow: auto;">
-      <div class="tab-pane fade active show" id="panel-load_requests-html" role="tabpanel" aria-labelledby="tab-load_requests-html"><iframe src="load_requests.html" style="height:500px;"></iframe></div>
+      <div class="tab-pane fade active show" id="panel-load_requests-html" role="tabpanel" aria-labelledby="tab-load_requests-html"><iframe src="ui/load_requests.html" style="height:500px;"></iframe></div>
       <div class="tab-loading">
         <div>
           <h2 class="display-4">loading <i class="fa fa-sync fa-spin"></i></h2>
@@ -198,6 +283,76 @@ else{
 
   the login
 -->
+<div class="modal fade" id="modal-reg" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color:  rgb(152, 29, 223);">Registration</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding-left: 15%;">
+        <div class="register-box">
+          <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+              <img src="ui/dist/img/acc.png" alt="charity system" class="brand-image img-circle elevation-3" style="opacity: 1">
+            </div>
+            <div class="card-body">
+              <form action="" method="post">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Full name" id="name">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Email" id="mail">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Password" id="passd">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-lock"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Retype password" id="rpass">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-lock"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color:#b503fc;border: none;" id="ngo">Register NGO</button>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color:#b503fc; border: none;" id="rdonor">Register as Donor</button>
+                  </div>
+                  <!-- /.col -->
+                </div>
+              </form>
+        
+            </div>
+            <!-- /.form-box -->
+          </div><!-- /.card -->
+          </div>
+      
+</div>
+</div>
+</div>
+</div>
 
   <div class="modal fade" id="modal-default" style="display: none;">
    <div class="modal-dialog">
@@ -216,7 +371,7 @@ else{
           
             <div class="card-body login-card-body">
               <div class="card-header text-center">
-                <img src="dist/img/acc.png" alt="charity system" class="brand-image img-circle elevation-3" style="opacity: 1">
+                <img src="ui/dist/img/acc.png" alt="charity system" class="brand-image img-circle elevation-3" style="opacity: 1">
               </div>
               <form action="" method="post">
                 <div class="input-group mb-3">
@@ -242,21 +397,14 @@ else{
                     <button type="submit" class="btn btn-primary btn-block" style="background-color: #ca03fc;border: none;" id="login" >Sign In</button>
                   </div>
                   <div class="col-8">
-                   
+                    <a href="ui/forgot-password.html">forgot password</a>
                   </div>
              
                   <!-- /.col -->
                 </div>
               </form>
               <!-- /.social-auth-links -->
-              <center>
-              <p class="mb-1">
-                <a href="forgot-password.html">forgot password</a>
-              </p>
-              <p class="mb-0">
-                <a href="register.html" class="text-center">Register</a>
-              </p>
-            </center>
+        
             </div>
             <!-- /.login-card-body -->
           </div>
@@ -285,10 +433,10 @@ else{
 
 <!-- jQuery -->
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="ui/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="ui/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="ui/dist/js/demo.js"></script>
 </body>
 </html>

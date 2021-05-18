@@ -120,6 +120,9 @@ if(isset($_GET['request']))
                 $deleting_ngo=new ngo($ngo->get_id());
                 $deleting_ngo->delete_file(intval($_GET['id']));
                 break;
+
+         
+  
                 
               
 

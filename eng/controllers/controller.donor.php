@@ -97,10 +97,8 @@ if(isset($_GET['request']))
               }
               break;
               case "donate":
-
                 if(isset($_GET['rec']) && isset($_GET['amount'])) 
                 {
-                 
                  $data=[];
                  $data['don_time']="";
                  $data['don_date']="";
@@ -109,8 +107,8 @@ if(isset($_GET['request']))
                  $data['req_id']=$_GET['reqid'];
                  $data['donor']=$donor->get_id();
                  $obj=new donor($donor->get_id());
-                 if($obj->donate($data)){ print "donation successful";}
-                 else{print "donation failed, try again";}
+                 if($obj->donate($data)){ print "success";}
+                 else{print "fail";}
    
    
                 }
@@ -130,7 +128,8 @@ if(isset($_FILES['thefile']))
             $uploading_donor=new donor($donor->get_id());
             if($uploading_donor->uploadlogo($_FILES['thefile'])==true)
             {
-               $donor->set_img($donor->get_id().basename($_FILES['thefile']['name']));
+               $uploading_donor=new donor($donor->get_id());
+               $donor->set_img($uploading_donor->get_data()->get_img());
                $_SESSION['donor']=$donor;
                print "image/logo changed";
 

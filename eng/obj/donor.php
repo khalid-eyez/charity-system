@@ -34,7 +34,7 @@ class donor extends charity_user
     {
   
   $target_dir ="../../ui/dist/img/";
-  $target_file = $target_dir .$this->data->get_id().basename($file["name"]);
+  $target_file = $target_dir.time()."profil.".pathinfo($file['name'],PATHINFO_EXTENSION);
   $uploadOk = 1;
   if (file_exists($target_file)) {
     print "file already exists.";
@@ -53,7 +53,7 @@ class donor extends charity_user
        
        $uploadmod=$this->data;
   
-       if($uploadmod->update("donor_img",$this->data->get_id().basename($file["name"]))==true){ return true; }
+       if($uploadmod->update("donor_img",time()."profil.".pathinfo($file['name'],PATHINFO_EXTENSION))==true){ return true; }
        else{ unlink($target_file); print "updating failed";}
     } else {
       print "updating failed";
