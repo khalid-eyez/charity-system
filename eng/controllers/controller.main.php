@@ -18,6 +18,13 @@ if(isset($_GET['request']))
         print json_encode($all);
      
         break;
+
+        case "onereq":
+          $main1=new main($_GET['reqid']);
+          $all1=$main1->viewAll();
+          
+          print json_encode($all1);
+          break;
       
 
       

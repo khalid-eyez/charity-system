@@ -7,6 +7,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="donation saves lifes" /> 
+  <meta property="og:description" content="DONATE TO HELP PEOPLE IN TROUBLE" /> 
+  <meta property="og:image" content="http://charity.potex.co.tz/dist/img/logo.jpg" /><meta property="og:image" content="http://www.[ourwebsite].com/overdriven-blues-music-tshirt-art-black.JPG" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://charity.potex.co.tz/main.html" />
+  <meta property="og:site_name" content="the charity system" />      
+  <meta name="title" content="the best way for your donation" />
+  <meta name="description" content="donate to save life, make the worl a better place" />
+  <link rel="image_src" href="http://charity.potex.co.tz/dist/img/logo.jpg" />
   <title>charity main</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -19,7 +28,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="ui/plugins/jquery/jquery.min.js"></script>
   <script src="ui/sweet.js"></script>
   <script>
+ 
   $('document').ready(function(){
+
 
     $('#ngo').click(function(d){
 
@@ -121,6 +132,7 @@ else{
        var title=dataobj.title[z];
        var budget=dataobj.budget[z];
        var desc=dataobj.desc[z];
+       var ids=dataobj.ids[z];
         var elem='<div class="content">';
           elem+='<div class="content">';
           elem+='<div class="content">';
@@ -156,7 +168,7 @@ else{
           elem+='<div class="post">';
           elem+='<p>'+desc+'</p>';
           elem+='<p>';
-          elem+='<a href="#" class="link-black text-sm mr-2"><i class="fa fa-facebook-square" aria-hidden="true" style="font-size:18px">share</i></a>';
+          elem+='<a href="#" class="link-black text-sm mr-2" id="'+ids+'"><i class="fa fa-facebook-square" aria-hidden="true" style="font-size:18px">share</i></a>';
           elem+='<span class="float-right">';
           elem+='<a href="#" class="link-black text-sm">';
           elem+='<i class="far fa-comments mr-1"></i> Comments (5)';

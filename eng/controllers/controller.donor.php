@@ -118,6 +118,28 @@ if(isset($_GET['request']))
                 }
    
                 break;
+                case "comment":
+                  $data=[];
+                  $data['com_time']="";
+                  $data['com_date']="";
+                  $data['comment']=$_GET['com'];
+                  $data['req_id']=$_GET['reqid'];
+                  $data['donor_id']=$donor->get_id();
+                
+                  $obj=new donor($donor->get_id());
+                  $comobj=$obj->get_data()->get_comment();
+                  $comobj->set_comment($data);
+
+                  if($comobj->save_comment()==true)
+                  {
+                    print "done";
+                  }
+                  else{
+
+                    print "an error occured";
+                  }
+                break;
+
 
     }
 

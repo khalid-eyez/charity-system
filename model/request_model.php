@@ -38,7 +38,7 @@ class  request_model extends charity_db
      $this->share=new shares_model();
      $load=$this->load_request($obj);
      $this->load_donations();
-     $this->load_comments();
+     $this->load_comments($obj);
      $this->load_shares();
 
  }
@@ -86,21 +86,26 @@ class  request_model extends charity_db
 $this->donation=new donations_model();
 }
 //loading all comments for this request
-private function load_comments()
+private function load_comments($id=null)
 {
-   $this->entity="comments";
-   $comments_data=parent::fetch_all($this->req_id);
 
-   if($comments_data!=1 && $comments_data!=null)
-   {
-     while($com=mysqli_fetch_assoc($comments_data))
-     {
-     $this->comment=new comments_model($com['com_id']);
-     array_push($this->all_comments,$this->comment);
-     }
-   }
+//////////////////
+if($id!=null)
+{
+$sql1="select * from comments where req_id=".$id;
+$comments_data=parent::fetch_data($sql1);
+
+if($comments_data!=null)
+{
+  while($com=mysqli_fetch_assoc($comments_data))
+  {
+    $this->comment=new comments_model($com['com_id']);
+    array_push($this->all_comments,$this->comment);
+  }
+}
 
 $this->comment=new comments_model();
+}
 }
 //loading all shares made on this requests
 

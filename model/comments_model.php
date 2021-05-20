@@ -59,8 +59,8 @@ class comments_model extends charity_db
   public function save_comment()
   {
      $sql="insert into comments (comment,com_date,com_time,req_id,donor_id)";
-     $sql=$sql."values(".$this->comment.",".$this->com_date.",".$this->com_time;
-     $sql=$sql.",".$this->req_id.",".$this->donor_id.")";
+     $sql=$sql."values('".$this->comment."','".$this->com_date."','".$this->com_time;
+     $sql=$sql."',".$this->req_id.",".$this->donor_id.")";
 
      if(parent::insert_data($sql)){return true;}else{return false;}
 
