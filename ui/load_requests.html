@@ -88,11 +88,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='<div class="card card-primary collapsed-card border-0" style="border:none">';
           elem+='<div class="" style="backgroundColor:white;border:0">';
           elem+='<span class="float-right" id="'+idd+'" onclick="get_all_comments(this)">';
-          elem+='<a href="#" class="link-black text-sm" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
+          elem+='<a href="#"  class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
           elem+='<i class="far fa-comments mr-1" id="com">Comments ('+comno+')</i> ';
           elem+='</a>';
           elem+='</span>';
-          elem+='<div class="fb-share-button" ><a href="#" id="'+idd+'" onclick="share(this)"><i class="fa fa-facebook-square"></i>share</a></div>';
+          elem+='<div class="fb-share-button" style="margin-left:1%"><a href="#" id="'+idd+'" onclick="share(this)"><i class="fa fa-facebook-square"></i>share</a></div>';
           elem+='<textarea cols="1" class="form-control form-control-sm" style="width:60%;height:30px;margin-left:18%;border-radius:8px;overflow:hidden"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {event.preventDefault();comment(this);}" ></textarea>';
           elem+='<div class="card-tools">';
           elem+='<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
@@ -296,7 +296,7 @@ function(data){
                     content+='<div class="card-header">';
   
                     content+='<a href="#" class="brand-link" >';
-                    content+='<img src="dist/img/'+img+'"  style="width:50px;height:50px" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
+                    content+='<img src="dist/img/'+img+'"  alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
                     content+='<span class="brand-text font-weight-light" style="font-weight: bold; color: rgb(152, 29, 223);" >'+fullname+'</span>';
                     content+='</a>';
                     content+='<p style="margin-left:20%">'+comment+'</p>';
