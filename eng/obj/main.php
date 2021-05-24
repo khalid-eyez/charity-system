@@ -1,11 +1,12 @@
 <?php 
 namespace eng\obj;
-use \model\{admin_model,donor_model,ngo_model,main_model};
+use \model\{admin_model,donor_model,ngo_model,main_model,request_model};
 require_once("../../autoload.php");
 
 class main 
 {
   private $requests;
+  private $comments=array();
 
   public function __construct($id=null)
   {
@@ -16,6 +17,7 @@ class main
   else
   {
     $this->requests=(new main_model($id))->get_all_requests();
+    $this->comments=(new request_model($id))->get_all_comments();
   }
   }
  public function viewAll()
@@ -42,6 +44,27 @@ class main
 
    return $returnall;
 
+ }
+
+ public function viewcomments()
+ {
+   $commz=$this->comments;
+   $returnall=array('img'=>array(),'fullname'=>array(),'date'=>array(),'time'=>array(),'thecomment'=>array());
+   for($co=0;$co<count($commz);$co++)
+   {
+     $com=$commz[$co];
+     $donor=new donor_model($com->get_donor());
+
+     array_push($returnall['img'],$donor->get_img());
+     array_push($returnall['fullname'],$donor->get_fname()."".$donor->get_lname());
+     array_push($returnall['date'],$com->get_time());
+     array_push($returnall['time'],$com->get_date());
+     array_push($returnall['thecomment'],$com->get_comment());
+    
+
+   }
+
+  return $returnall;
  }
 
 

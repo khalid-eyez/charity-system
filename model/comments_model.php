@@ -25,7 +25,7 @@ class comments_model extends charity_db
  {
    if($id!=null)
    {
-     $sql="select * from comments where com_id=".$id;
+     $sql="select * from comments where com_id=".$id." ORDER BY com_id DESC";
      $res=parent::fetch_data($sql);
      if($res==null){return false;}
      else

@@ -25,6 +25,14 @@ if(isset($_GET['request']))
           
           print json_encode($all1);
           break;
+
+          case "allcom":
+           
+          $commobj=new main($_GET['reqid']);
+
+          print json_encode($commobj->viewcomments());
+
+          break;
       
 
       

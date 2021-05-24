@@ -85,20 +85,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='<div class="active tab-pane" id="activity">';
           elem+='<div class="post">';
           elem+='<p>'+desc+'</p>';
-          elem+='<span class="float-right">';
-          elem+='<a href="#" class="link-black text-sm">';
+          elem+='<div class="card card-primary collapsed-card border-0" style="border:none">';
+          elem+='<div class="" style="backgroundColor:white;border:none">';
+          elem+='<span class="float-right" id="'+idd+'" onclick="get_all_comments(this)">';
+          elem+='<a href="#" class="link-black text-sm" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
           elem+='<i class="far fa-comments mr-1" id="com">Comments ('+comno+')</i> ';
           elem+='</a>';
           elem+='</span>';
           elem+='<div class="fb-share-button" id="'+idd+'" onclick="share(this)"><a href="#"><i class="fa fa-facebook-square"></i>share</a></div>';
-          elem+='<textarea cols="3" class="form-control form-control-sm"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {comment(this);}"></textarea>';
+          elem+='<textarea cols="3" class="form-control form-control-sm"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {comment(this);}" ></textarea>';
+          elem+='<div class="card-tools">';
+          elem+='<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
+         // elem+='<i class="fas fa-minus"></i>';
+          elem+='</button>';
+          elem+='</div>';
+          elem+='</div>';
+          elem+='<div class="card-body" style="border-color:white">';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
-          totelem+=elem;    
+          elem+='</div>';
+          elem+='</div>';
+          totelem+=elem;  
+
+         
+                  
+                    //<h3 class="card-title">General account information</h3>
+       
      }
    
    
@@ -219,7 +235,7 @@ function(data){
             if (this.readyState == 4 && this.status == 200) {
             // swal(this.responseText,"","info");
                 if(this.responseText=="no"){ alert("oops! unknown problem, try again","","info");}
-                else{getcomno(y);}
+                else{getcomno(y);get_all_comments(y);}
             }
         };
         xmlhttp.open("GET", "../eng/controllers/controller.donor.php?com=" + comment+"&&reqid="+reqid+"&&request=comment", true);
@@ -250,6 +266,56 @@ function(data){
         xmlhttp.send();
         
        //alert(elem);
+
+  }
+
+  function get_all_comments(c)
+  {
+    var reqid=c.id;
+    var elem=c.parentNode.parentNode.parentNode.querySelector('.card-body');
+    //swal(elem.parentNode,"","info");
+
+    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              
+              var obj = JSON.parse(xmlhttp.responseText);
+              var content="";
+              for(var z in obj.fullname)
+              {
+                var img=obj.img[z];
+                var fullname=obj.fullname[z];
+                var time=obj.time[z];
+                var date=obj.date[z];
+                var comment=obj.thecomment[z];
+       
+                    content+='<div class="card">';
+                    content+='<div class="card-header">';
+  
+                    content+='<a href="#" class="brand-link" >';
+                    content+='<img src="dist/img/'+img+'" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
+                    content+='<span class="brand-text font-weight-light" style="font-weight: bold; color: rgb(152, 29, 223);" >'+fullname+'</span>';
+                    content+='</a>';
+                    content+='<p style="margin-left:20%">'+comment+'</p>';
+                    content+='<p style="margin-left:60%; color:#ccc; font-size:13px">'+date+'&nbsp&nbsp &nbsp &nbsp '+time+'</p>';
+                    content+='</div>';
+                    //content+='<div class="card-body">'
+    
+      
+                    //content+='</div>';
+  
+                    content+='</div>';
+          
+              }
+
+              elem.innerHTML=content;
+    
+            }
+        };
+        xmlhttp.open("GET", "../eng/controllers/controller.main.php?reqid="+reqid+"&&request=allcom", true);
+        xmlhttp.send();
+
+
 
   }
 

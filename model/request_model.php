@@ -92,7 +92,7 @@ private function load_comments($id=null)
 //////////////////
 if($id!=null)
 {
-$sql1="select * from comments where req_id=".$id;
+$sql1="select * from comments where req_id=".$id." ORDER BY com_id DESC";
 $comments_data=parent::fetch_data($sql1);
 
 if($comments_data!=null)

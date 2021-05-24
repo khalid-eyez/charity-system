@@ -42,6 +42,7 @@ class main_model extends charity_db
 
   }
 }
+
   public function get_all_requests(){return $this->allrequests;}
 
 }
