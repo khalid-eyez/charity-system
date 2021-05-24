@@ -25,7 +25,9 @@ $('document').ready(function(){
   function(data){
        if(data!="" && data!="null")
        {
+       // $('#loader').show();
          $('.card-body').html(data);
+         $('#loader').hide();
 
        }
        else{
@@ -57,11 +59,19 @@ $('document').ready(function(){
   </div>
   <div class="card-body">
 
-
+   
 
   </div>
-   
+
 </div>
+<div class="content-header">
+<div class="tab-loading" id="loader" style="margin-left: 35%;margin-top: 10%;">
+  <div>
+    <h2 class="display-4">loading <i class="fa fa-sync fa-spin"></i></h2>
+  </div>
+  </div>
+  </div>
+  </div>
 <!-- ./wrapper -->
 
 <!-- jQuery -->
