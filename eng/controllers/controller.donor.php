@@ -100,8 +100,8 @@ if(isset($_GET['request']))
                 if(isset($_GET['rec']) && isset($_GET['amount'])) 
                 {
                  $data=[];
-                 $data['don_time']="";
-                 $data['don_date']="";
+                 $data['don_time']=date('H:i:s');
+                 $data['don_date']=date('Y-m-d');
                  $data['amount']=$_GET['amount'];
                  $data['recommandation']=$_GET['rec'];
                  $data['req_id']=$_GET['reqid'];
@@ -139,6 +139,16 @@ if(isset($_GET['request']))
                     print "an error occured";
                   }
                 break;
+
+                case "alldonations":
+
+                  $obj=new donor($donor->get_id());
+                  print $obj->viewall_requests();
+
+                break;
+
+
+
 
 
     }

@@ -1,7 +1,7 @@
 <?php
 
 namespace eng\obj;
-use \model\{admin_model,donor_model,ngo_model};
+use \model\{admin_model,donor_model,ngo_model,request_model};
 
 require_once("../../autoload.php");
 
@@ -90,7 +90,53 @@ class donor extends charity_user
             return false;
         }
     }
-   //update
+  //all donattions
+
+   public function viewall_requests()
+   {
+
+     $alldon=$this->data->get_all_donations();
+     $donprint="";
+     for($d=0;$d<count($alldon);$d++)
+     {
+      $req=new request_model($alldon[$d]->get_req());
+      $don_ngo=new ngo_model($req->get_requester());
+      $donprint.='<div class="card">';
+      $donprint.='<div class="card-header p-2">';
+      $donprint.='<div class="user-block" style="margin-right:20%">';
+      $donprint.='<img class="img-circle img-bordered-sm" src="dist/img/'.$don_ngo->get_img().'" >';
+      $donprint.='<span class="username">';
+      $donprint.='<a href="#">'.$don_ngo->get_name().'</a>';
+      $donprint.='</span>';
+      $donprint.='</div>';
+      $donprint.='<div class="row">';
+      $donprint.='<div class="col-md-4">';
+      $donprint.='<img class="img-circle img-bordered-sm" src="dist/img/donate.png" alt="beg icon" style="height:85%;width:20%">';
+      $donprint.='<span>'.$alldon[$d]->get_amount().' donated</span>';
+      $donprint.='</div>';
+      $donprint.='<div class="col-md-3">';
+      $donprint.='<span>';
+      $donprint.='<a href="#" class="link-black text-sm">';
+      $donprint.='<span>'.$alldon[$d]->get_date().'</span>';
+      $donprint.='</a>';
+      $donprint.='</span>';
+      $donprint.='</div>';
+      $donprint.='<div class="col-md-3">';
+      $donprint.='<span>';
+      $donprint.='<a href="#" class="link-black text-sm">';
+      $donprint.='<span>'.$alldon[$d]->get_time().'</span>';
+      $donprint.='</a>';
+      $donprint.='</span>';
+      $donprint.='</div>';
+      $donprint.='</div>';
+      $donprint.='</div>';
+      $donprint.='</div>';
+    
+
+     }
+
+     return $donprint;
+   }
     //getters and setters
 
     public function set_data($data){$this->data=$data;}

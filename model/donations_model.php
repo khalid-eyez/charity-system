@@ -41,7 +41,7 @@ class  donations_model extends charity_db
              $this->recommand=$req_data['recommandation'];
              $this->req_id=$req_data['req_id'];
              $this->donor_id=$req_data['donor_id'];
-             $this->requester=$req_data['ngo_id'];
+             $this->requester=(new request_model($req_data['req_id']))->get_ngo_id();
          
          }
 

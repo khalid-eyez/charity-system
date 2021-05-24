@@ -104,19 +104,19 @@ class donor_model extends charity_db
  }
 private function load_donations()
 {
-   $this->entity="donations";
-   $donations_data=parent::fetch_all($this->donor_id);
+$sql="select * from donations where donor_id=".$this->donor_id;
+   $donations=parent::fetch_data($sql);
 
-   if($donations_data!=1 && $donations_data!=null)
+   if($donations!=null)
    {
-     while($don=mysqli_fetch_assoc($donations_data))
+     while($don=mysqli_fetch_assoc($donations))
      {
-     $this->donation=new donations_model($don['don_id']);
-     arraypush($this->all_donations,$this->donation);
+        $this->donation=new donations_model($don['don_id']);
+        array_push($this->all_donations,$this->donation);
      }
    }
 
-$this->donation=new donations_model();
+   $this->donation=new donations_model();
 }
   
   public function set_donor($data)
