@@ -80,20 +80,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
-          elem+='<div class="card-body">';
+          elem+='<div class="card-body" style="border:none">';
           elem+='<div class="tab-content">';
           elem+='<div class="active tab-pane" id="activity">';
           elem+='<div class="post">';
           elem+='<p>'+desc+'</p>';
           elem+='<div class="card card-primary collapsed-card border-0" style="border:none">';
-          elem+='<div class="" style="backgroundColor:white;border:none">';
+          elem+='<div class="" style="backgroundColor:white;border:0">';
           elem+='<span class="float-right" id="'+idd+'" onclick="get_all_comments(this)">';
           elem+='<a href="#" class="link-black text-sm" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
           elem+='<i class="far fa-comments mr-1" id="com">Comments ('+comno+')</i> ';
           elem+='</a>';
           elem+='</span>';
-          elem+='<div class="fb-share-button" id="'+idd+'" onclick="share(this)"><a href="#"><i class="fa fa-facebook-square"></i>share</a></div>';
-          elem+='<textarea cols="3" class="form-control form-control-sm"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {comment(this);}" ></textarea>';
+          elem+='<div class="fb-share-button" ><a href="#" id="'+idd+'" onclick="share(this)"><i class="fa fa-facebook-square"></i>share</a></div>';
+          elem+='<textarea cols="1" class="form-control form-control-sm" style="width:60%;height:30px;margin-left:18%;border-radius:8px;overflow:hidden"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {event.preventDefault();comment(this);}" ></textarea>';
           elem+='<div class="card-tools">';
           elem+='<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
          // elem+='<i class="fas fa-minus"></i>';
@@ -101,6 +101,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='</div>';
           elem+='</div>';
           elem+='<div class="card-body" style="border-color:white">';
+          elem+='</div>';
+          elem+='</div>';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
@@ -223,6 +225,7 @@ function(data){
   {
     //get the id of the request
     //y.preventDefault();
+    
     var reqid=y.id;
     var comment=y.value;
    // alert(comment);
@@ -235,7 +238,7 @@ function(data){
             if (this.readyState == 4 && this.status == 200) {
             // swal(this.responseText,"","info");
                 if(this.responseText=="no"){ alert("oops! unknown problem, try again","","info");}
-                else{getcomno(y);get_all_comments(y);}
+                else{getcomno(y);get_all_comments(y);var elem=y.parentNode.parentNode.classList.remove('collapsed-card');y.value=""; }
             }
         };
         xmlhttp.open("GET", "../eng/controllers/controller.donor.php?com=" + comment+"&&reqid="+reqid+"&&request=comment", true);
@@ -293,7 +296,7 @@ function(data){
                     content+='<div class="card-header">';
   
                     content+='<a href="#" class="brand-link" >';
-                    content+='<img src="dist/img/'+img+'" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
+                    content+='<img src="dist/img/'+img+'"  style="width:50px;height:50px" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
                     content+='<span class="brand-text font-weight-light" style="font-weight: bold; color: rgb(152, 29, 223);" >'+fullname+'</span>';
                     content+='</a>';
                     content+='<p style="margin-left:20%">'+comment+'</p>';

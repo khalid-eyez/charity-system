@@ -120,8 +120,8 @@ if(isset($_GET['request']))
                 break;
                 case "comment":
                   $data=[];
-                  $data['com_time']="";
-                  $data['com_date']="";
+                  $data['com_time']=date('H:i:s');
+                  $data['com_date']=date('Y-m-d');
                   $data['comment']=$_GET['com'];
                   $data['req_id']=$_GET['reqid'];
                   $data['donor_id']=$donor->get_id();

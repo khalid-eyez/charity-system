@@ -7,6 +7,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="donation saves lifes" /> 
+<meta property="og:description" content="DONATE TO HELP PEOPLE IN TROUBLE" /> 
+<meta property="og:image" content="http://charity.potex.co.tz/dist/img/logo.jpg" /><meta property="og:image" content="http://www.[ourwebsite].com/overdriven-blues-music-tshirt-art-black.JPG" />
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://charity.potex.co.tz/main.html" />
+<meta property="og:site_name" content="the charity system" />      
+<meta name="title" content="the best way for your donation" />
+<meta name="description" content="donate to save life, make the worl a better place" />
+<link rel="image_src" href="http://charity.potex.co.tz/dist/img/logo.jpg" />
+
+
   <title>charity main</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -21,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="XuOGPJqz"></script>
   <script>
   $('document').ready(function(){
-
+  
 
   $.get("../eng/controllers/controller.main.php",
   {
@@ -29,6 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
   },
   function(data){
+    //alert(data);
    var dataobj=$.parseJSON(data);
    var totelem="";
  
@@ -40,9 +52,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
        var budget=dataobj.budget[z];
        var desc=dataobj.desc[z];
        var idd=dataobj.ids[z];
-        var elem='<div class="content">';
-          elem+='<div class="content">';
-          elem+='<div class="content">';
+       var comno=dataobj.comno[z];
+       var elem='<div class="content">';
           elem+='<div class="container" id="reqq">';
           elem+='<div class="card">';
           elem+='<div class="card-header p-2 " >';
@@ -62,25 +73,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='</div>';
           elem+='<div class="col-md-3">';
           elem+='<span>';
-          //elem+='<a href="#" class="link-black text-sm">';
-          //elem+='<button style="font-size:22px; border:solid 1px #ccc;" id="'+idd+'" data-toggle="modal" data-target="#modal-default">Donate<i class="fa fa-cc-paypal" style="color:blue" ></i></button>';
-          //elem+='</a>';
+          elem+='<a href="#" class="link-black text-sm">';
+          elem+='<button style="font-size:22px; border:solid 1px #ccc;" id="'+idd+'" data-toggle="modal" data-target="#modal-default">Donate<i class="fa fa-cc-paypal" style="color:blue" ></i></button>';
+          elem+='</a>';
           elem+='</span>';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
-          elem+='<div class="card-body">';
+          elem+='<div class="card-body" style="border:none">';
           elem+='<div class="tab-content">';
           elem+='<div class="active tab-pane" id="activity">';
           elem+='<div class="post">';
           elem+='<p>'+desc+'</p>';
-          elem+='<span class="float-right">';
-          //elem+='<a href="#" class="link-black text-sm">';
-          //elem+='<i class="far fa-comments mr-1"></i> Comments (5)';
-          //elem+='</a>';
+          elem+='<div class="card card-primary collapsed-card border-0" style="border:none">';
+          elem+='<div class="" style="backgroundColor:white;border:none;box-shadow:none">';
+          elem+='<span class="float-right" id="'+idd+'" onclick="get_all_comments(this)">';
+          elem+='<a href="#" class="link-black text-sm" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
+          elem+='<i class="far fa-comments mr-1" id="com">Comments ('+comno+')</i> ';
+          elem+='</a>';
           elem+='</span>';
-          elem+='<div class="fb-share-button" id="'+idd+'" onclick="share(this)"><a href="#"><i class="fa fa-facebook-square"></i>share</a></div>';
-          //elem+='<textarea cols="3" class="form-control form-control-sm"  placeholder="Type a comment"  id="'+idd+'"></textarea>';
+          elem+='<div class="fb-share-button" ><a href="#" id="'+idd+'" onclick="share(this)"><i class="fa fa-facebook-square"></i>share</a></div>';
+          //elem+='<textarea cols="3" class="form-control form-control-sm"  placeholder="Type a comment"  id="'+idd+'" onkeydown="javascript: if(event.keyCode == 13) {comment(this);}" ></textarea>';
+          elem+='<div class="card-tools">';
+          elem+='<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">';
+         // elem+='<i class="fas fa-minus"></i>';
+          elem+='</button>';
+          elem+='</div>';
+          elem+='</div>';
+          elem+='<div class="card-body" style="border-color:white">';
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
@@ -89,11 +109,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
           elem+='</div>';
           elem+='</div>';
           elem+='</div>';
-          totelem+=elem;
-          
-   
+          elem+='</div>';
+          elem+='</div>';
+          totelem+=elem;  
 
+         
+                  
+                    //<h3 class="card-title">General account information</h3>
+       
      }
+   
    
    $('#reqrapper').append(totelem);
    $('#loader').hide();
@@ -142,7 +167,13 @@ $('textarea').eq(3).focus(function(z){
   );*/
  }
 });
+$('.card').each(function(index,obj){
 
+console.log(index);
+
+
+
+});
 
 $('#req').click(function(r){
 
@@ -180,11 +211,111 @@ function(data){
 
 });
 
-function share(x)
+  function share(x)
   {
     var com=encodeURIComponent(x.id); 
     window.open("https://www.facebook.com/sharer.php?u=http://charity.potex.co.tz/charity/ui/request.html?postid="+com);
     //alert(content);
+
+
+
+  }
+
+  function comment(y)
+  {
+    //get the id of the request
+    //y.preventDefault();
+    var reqid=y.id;
+    var comment=y.value;
+   // alert(comment);
+    if (comment.length == 0) {
+      swal("please type a comment","","info");
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            // swal(this.responseText,"","info");
+                if(this.responseText=="no"){ alert("oops! unknown problem, try again","","info");}
+                else{getcomno(y);get_all_comments(y);var elem=y.parentNode.parentNode.classList.remove('collapsed-card'); }
+            }
+        };
+        xmlhttp.open("GET", "../eng/controllers/controller.donor.php?com=" + comment+"&&reqid="+reqid+"&&request=comment", true);
+        xmlhttp.send();
+    }
+
+  }
+  function getcomno(z)
+  {
+    var reqid=z.id;
+    var elem=z.parentNode.parentNode.querySelector('.far');
+   // alert(comment);
+  
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              var obj = JSON.parse(xmlhttp.responseText);
+              for(var z in obj .name)
+              {
+                var comno=obj.comno[z]; 
+                elem.innerHTML="comments("+comno+")";
+          
+              }
+    
+            }
+        };
+        xmlhttp.open("GET", "../eng/controllers/controller.main.php?reqid="+reqid+"&&request=onereq", true);
+        xmlhttp.send();
+        
+       //alert(elem);
+
+  }
+
+  function get_all_comments(c)
+  {
+    var reqid=c.id;
+    var elem=c.parentNode.parentNode.parentNode.querySelector('.card-body');
+    //swal(elem.parentNode,"","info");
+
+    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              
+              var obj = JSON.parse(xmlhttp.responseText);
+              var content="";
+              for(var z in obj.fullname)
+              {
+                var img=obj.img[z];
+                var fullname=obj.fullname[z];
+                var time=obj.time[z];
+                var date=obj.date[z];
+                var comment=obj.thecomment[z];
+       
+                    content+='<div class="card">';
+                    content+='<div class="card-header">';
+  
+                    content+='<a href="#" class="brand-link" >';
+                    content+='<img src="dist/img/'+img+'"  style="width:50px;height:50px" alt="charity system" class="brand-image img-circle elevation-3" style="opacity:1">';
+                    content+='<span class="brand-text font-weight-light" style="font-weight: bold; color: rgb(152, 29, 223);" >'+fullname+'</span>';
+                    content+='</a>';
+                    content+='<p style="margin-left:20%">'+comment+'</p>';
+                    content+='<p style="margin-left:60%; color:#ccc; font-size:13px">'+date+'&nbsp&nbsp &nbsp &nbsp '+time+'</p>';
+                    content+='</div>';
+                    //content+='<div class="card-body">'
+    
+      
+                    //content+='</div>';
+  
+                    content+='</div>';
+          
+              }
+
+              elem.innerHTML=content;
+    
+            }
+        };
+        xmlhttp.open("GET", "../eng/controllers/controller.main.php?reqid="+reqid+"&&request=allcom", true);
+        xmlhttp.send();
 
 
 
@@ -268,7 +399,6 @@ function share(x)
 
 <!-- jQuery -->
 <div id="fb-root"></div>
-
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
